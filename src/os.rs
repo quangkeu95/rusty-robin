@@ -45,7 +45,7 @@ where
 #[cfg(test)]
 mod test {
     use super::parse_json_from_file;
-    use claim::assert_ok;
+    use claims::assert_ok;
     use serde::Deserialize;
 
     #[test]
