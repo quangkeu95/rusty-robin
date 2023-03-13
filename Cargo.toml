@@ -11,3 +11,7 @@ claims = "0.7.1"
 serde = { version = "1.0.154", features = ["derive"] }
 serde_json = "1.0.94"
 thiserror = "1.0.39"
+
+[dependencies.ethers]
+version = "2.0.0"
+
