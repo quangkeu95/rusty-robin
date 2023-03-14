@@ -37,6 +37,10 @@ impl HttpProviderHandler {
         })
     }
 
+    pub fn validate_rpc_url(rpc_url: &str) -> Option<HttpProvider> {
+        HttpProvider::try_from(rpc_url).map_or(None, |p| Some(p))
+    }
+
     pub fn get_list_providers(&self) -> Vec<HttpProvider> {
         self.rpc_urls
             .clone()
@@ -67,6 +71,35 @@ impl HttpProviderHandler {
     }
 }
 
+pub struct HttpProviderHandlerBuilder {
+    chain: Chain,
+    rpc_urls: Vec<String>,
+}
+
+impl HttpProviderHandlerBuilder {
+    pub fn new(chain: Chain) -> Self {
+        HttpProviderHandlerBuilder {
+            chain,
+            rpc_urls: vec![],
+        }
+    }
+
+    pub fn with_custom_rpc(mut self, rpc_url: &str) -> Self {
+        self.rpc_urls.push(rpc_url.to_owned());
+        self
+    }
+
+    pub fn build(self) -> Result<HttpProviderHandler, ProviderError> {
+        let mut provider_handler = HttpProviderHandler::new(self.chain)?;
+        self.rpc_urls.into_iter().for_each(|item| {
+            if let Some(_) = HttpProviderHandler::validate_rpc_url(item.as_str()) {
+                provider_handler.rpc_urls.push(item)
+            }
+        });
+        Ok(provider_handler)
+    }
+}
+
 #[cfg(test)]
 mod provider_test {
     use super::*;
@@ -88,5 +121,13 @@ mod provider_test {
         let http_provider_handler = setup_http_provider_handler();
         let best_provider = assert_ok!(http_provider_handler.fetch_best_provider().await);
         println!("best provider url {:?}", best_provider.url().as_str());
+    }
+
+    #[test]
+    fn test_with_custom_rpc() {
+        let provider_handler = assert_ok!(HttpProviderHandlerBuilder::new(Chain::AvalancheFuji)
+            .with_custom_rpc("https://endpoints.omniatech.io/v1/avax/fuji/public")
+            .build());
+        assert_ge!(3, provider_handler.rpc_urls().len());
     }
 }
