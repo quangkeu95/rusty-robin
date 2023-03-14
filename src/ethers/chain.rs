@@ -5,7 +5,11 @@ pub fn get_chain_rpc_urls(chain: Chain) -> Vec<String> {
         Chain::Arbitrum => vec!["https://arb1.arbitrum.io/rpc"],
         Chain::ArbitrumGoerli => vec!["https://goerli-rollup.arbitrum.io/rpc"],
         Chain::Avalanche => vec!["https://api.avax.network/ext/bc/C/rpc"],
-        Chain::AvalancheFuji => vec!["https://api.avax-test.network/ext/bc/C/rpc"],
+        Chain::AvalancheFuji => vec![
+            "https://rpc.ankr.com/avalanche_fuji",
+            "https://ava-testnet.public.blastapi.io/ext/bc/C/rpc",
+            "https://api.avax-test.network/ext/bc/C/rpc",
+        ],
         _ => unimplemented!(),
     };
     rpcs.into_iter()
