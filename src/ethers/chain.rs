@@ -9,7 +9,8 @@ pub fn get_chain_rpc_urls(chain: Chain) -> Vec<String> {
             "https://rpc.ankr.com/avalanche_fuji",
             "https://api.avax-test.network/ext/bc/C/rpc",
         ],
-        _ => unimplemented!(),
+        Chain::AnvilHardhat => vec!["http://localhost:8545"],
+        _ => unimplemented!("chain not supported"),
     };
     rpcs.into_iter()
         .map(|item| item.to_owned())

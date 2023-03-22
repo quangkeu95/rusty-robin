@@ -1,3 +1,4 @@
+#![allow(unused_imports)]
 use crate::errors::AppError;
 use ethers::{abi::Detokenize, prelude::ContractCall, providers::Middleware};
 
