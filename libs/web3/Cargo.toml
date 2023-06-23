@@ -1,0 +1,12 @@
+[package]
+name = "rr-web3"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+thiserror = {workspace = true}
+ethers-middleware = "2.0.4"
+ethers = { version = "2.0", features = ["rustls", "ws"] }
+ethers-core = "2.0.4"
+ethers-providers = "2.0.4"
+ethers-signers = "2.0.4"

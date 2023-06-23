@@ -1,0 +1,21 @@
+[package]
+name = "wizard"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "wizard"
+path = "src/main.rs"
+
+[dependencies]
+rr-common = { path = "../../libs/common/" }
+thiserror = {workspace = true}
+anyhow = {workspace = true}
+dotenvy = {workspace = true}
+tokio = {workspace = true}
+serde = {workspace = true}
+derive_more = {workspace = true}
+clap = { version = "4.2.4", features = ["cargo"]}
+serde_yaml = "0.9.21"
+
+

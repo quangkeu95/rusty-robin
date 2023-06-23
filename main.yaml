@@ -1,0 +1,12 @@
+version: "0.0.1"
+
+tasks:
+  - name: "Listen transfer event of MMLM token"
+    id: "listen-transfer-event"
+    description: "Listen transfer of MMLM token"
+    steps:
+    - name: "Generate MMLM contract binding from ABI"
+      use: "generate-abi-binding"
+      filepath: "./abi/MMLM.json"
+
+  - name: "Task 2"
