@@ -1,3 +1,4 @@
+pub use tracing;
 /// Reexport
 pub use tracing::*;
 
