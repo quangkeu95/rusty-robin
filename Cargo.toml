@@ -11,7 +11,8 @@ members = [
 
   # libraries
   "libs/web3",
-  "libs/common"
+  "libs/common",
+  "libs/logging"
 ]
 
 [workspace.dependencies]
